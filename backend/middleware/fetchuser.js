@@ -8,7 +8,7 @@ const fetchuser = (req, res, next)=>{
     }
     try {
         const data = jwt.verify(token, JWT_SECRET);
-        req.body.id = data.user.id;
+        req.user = data.user.id;
         next();
     } catch (error) {
         res.status(401).send({error: "Invalid Authentication Token"})

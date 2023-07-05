@@ -2,13 +2,13 @@ const express = require("express");
 const User = require("../models/User");
 const router = express.Router();
 const {body, validationResult} = require("express-validator")
-const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser")
 const JWT_SECRET = process.env.JWT_SECRET;
+// const bcryptjs = require("bcryptjs")
 
 
-// Route 1: Sign Up Using localhost:5000/auth/createuser
+// Route 1: Sign Up Using localhost:5000/api/auth/createuser (POST) (No Login Required)
 router.post("/createuser",[
     body("name", "Please Enter A Valid Name!").isLength({min: 3}),
     body("email", "Please Enter A Valid E-mail!").isEmail(),
@@ -45,7 +45,7 @@ router.post("/createuser",[
 })
 
 
-// Route 2: Login Using localhost:5000/auth/login
+// Route 2: Login Using localhost:5000/auth/login (POST) (No Login Required)
 router.post("/login",[
     body("email", "Please Enter A Valid E-mail!").isEmail(),
     body("password", "Password cannot be blank!").exists(),
@@ -84,10 +84,10 @@ router.post("/login",[
     }
 })
 
-// Route 3: Get details of a Logged In User Using localhost:5000/auth/getuser . 
+// Route 3: Get details of a Logged In User Using localhost:5000/auth/getuser (POST) (Login Required)
 router.post("/getuser", fetchuser, async (req, res)=>{
     try{
-        const user = await User.findById(req.body.id).select("-password");
+        const user = await User.findById(req.user).select("-password");
         res.send(user);
     }
     catch(error){
