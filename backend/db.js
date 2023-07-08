@@ -7,4 +7,4 @@ const connectToMongo = async()=>{
     console.log("Connected To Mongo Successfully!")
 }
 
-module.exports = connectToMongo;    
+module.exports = connectToMongo;

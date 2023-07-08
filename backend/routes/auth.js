@@ -36,11 +36,11 @@ router.post("/createuser",[
             user:{ id: user.id }
         }
         const authtoken = jwt.sign(data, JWT_SECRET)
-        res.json({authtoken})
+      return res.json({authtoken})
     }
     catch(error){
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
@@ -68,7 +68,7 @@ router.post("/login",[
         //     return res.status(400).json({error:"Invalid Credentials!"});
         // }
         if(req.body.password !== user.password && req.body.email.email !== user.email){
-            res.status(400).json({error:"Invalid Credentials!"})
+            return res.status(400).json({error:"Invalid Credentials!"})
         }    
         const data = {
             user:{
@@ -76,11 +76,11 @@ router.post("/login",[
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET)
-        res.json({authtoken})
+        return res.json({authtoken})
     }
     catch(error){
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+        return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
@@ -88,11 +88,11 @@ router.post("/login",[
 router.post("/getuser", fetchuser, async (req, res)=>{
     try{
         const user = await User.findById(req.user).select("-password");
-        res.send(user);
+      return res.send(user);
     }
     catch(error){
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 

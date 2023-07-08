@@ -8,11 +8,11 @@ const {body, validationResult} = require("express-validator")
 router.post("/fetchnotes",fetchuser, async (req, res)=>{
     try {
         const notes = await Notes.find({user: req.user})
-        res.json(notes)
+      return res.json({notes})
     }
     catch (error) {
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
@@ -30,15 +30,15 @@ router.post("/addnote",fetchuser,[
             user: req.user,
             title:  req.body.title,
             description: req.body.description,
-            tag: req.body.tag
+            tag: req.body.tag ? req.body.tag : "General"
 
         })
-        const saveNote = await note.save()
-        res.json(note)
+        await note.save()
+      return res.json(note)
     }
     catch (error) {
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
@@ -48,7 +48,7 @@ router.put("/updatenote/:id",fetchuser, async (req, res)=>{
         const newNote = {}
         if(req.body.title){newNote.title = req.body.title};
         if(req.body.description){newNote.description = req.body.description};
-        if(req.body.tag){newNote.tag = req.body.tag};
+        if(req.body.tag){newNote.tag = req.body.tag}else{newNote.tag = "General"};
 
         const note = await Notes.findById(req.params.id)
         if(!note){
@@ -58,11 +58,11 @@ router.put("/updatenote/:id",fetchuser, async (req, res)=>{
             return res.status(401).send({error: "Access Denied!"})
         }
         const updatedNote = await Notes.findByIdAndUpdate(req.params.id, {$set: newNote},{new: true});
-        res.json({updatedNote});
+      return res.json({updatedNote});
     }
     catch (error) {
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
@@ -77,11 +77,11 @@ router.put("/deletenote/:id",fetchuser, async (req, res)=>{
             return res.status(401).send({error: "Access Denied!"})
         }
         await Notes.findByIdAndRemove(req.params.id);
-        res.send({"Success":"Note Successfully Deleted"});
+      return res.send({"Success":"Note Successfully Deleted"});
     }
     catch (error) {
         console.error(error.message)
-        res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occured!"})
     }
 })
 
