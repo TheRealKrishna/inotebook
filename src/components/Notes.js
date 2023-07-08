@@ -4,14 +4,21 @@ import noteContext from '../context/notes/NoteContext'
 import EditNote from './EditNote'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { RotatingLines } from 'react-loader-spinner'
 
 export default function Notes() {
 const context = useContext(noteContext)
 const {notes, fetchNotes, deleteNote} = context
+const [loader, setLoader] = useState(true);
 const navigate = useNavigate();
 useEffect(()=>{
   if(localStorage.getItem("auth-token")){
-    fetchNotes()
+    new Promise(async (resolve, reject)=>{
+      await fetchNotes()
+      resolve()
+    }).then(()=>{
+      setLoader(false)
+    })
   }
   else{
     navigate("/login")
@@ -20,7 +27,6 @@ useEffect(()=>{
 
 const handleDelete = (id)=>{
   deleteNote(id);
-  toast.success("Note Successfully Deleted!");
 }
 
 const [noteToEdit, setNoteToEdit] = useState("");
@@ -32,11 +38,18 @@ const [noteToEdit, setNoteToEdit] = useState("");
     <div className="my-5">
           <h4 className='my-4'>Your Notes</h4>
           <hr/>
+          <center><RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="30"
+            visible={loader}
+          /></center>
           <div className="row my-3">
-            {notes.length === 0 && <p>No Notes To Display</p>}
+            {notes.length === 0 && !loader && <p>No Notes To Display</p>}
               {notes.map((note)=>{
                 return(
-                <div className="col-3 md-3" key={note._id}>
+                <div className="col-6 md-6" key={note._id}>
                   <div className="card my-3" style={{height: "90%"}}>
                     <div className="card-header bg-warning">
                       Note
@@ -51,7 +64,8 @@ const [noteToEdit, setNoteToEdit] = useState("");
                   </div>
                 </div>
                 )
-              })}
+              })
+            }
           </div>
     </div>
     </>

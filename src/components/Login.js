@@ -19,23 +19,31 @@ export default function Login() {
 
   const handleSubmit = async (e)=>{
       e.preventDefault()
-      const response = await fetch("http://localhost/api/auth/login", {method:"POST", headers : {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({email: credentials.email, password: credentials.password})
-     });
-     const json = await response.json()
-     if(json.authtoken){
-      localStorage.setItem("auth-token", json.authtoken)
-      navigate("/dashboard");
-      toast.success('Login Successful');
-     }
-     else if(json.error){
-      toast.error(json.error);
-     }
-     else{
-      toast.error("An unknown error occured!");
-     }
+      toast.promise(
+        new Promise(async(resolve, reject)=>{
+          const response = await fetch("https://themescode.shop/api/auth/login", {method:"POST", headers : {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email: credentials.email, password: credentials.password})
+           });
+           const json = await response.json()
+           if(json.authtoken){
+            localStorage.setItem("auth-token", json.authtoken)
+            navigate("/dashboard");
+            resolve("Logged In Successfully")
+           }
+           else if(json.error){
+            reject(json.error)
+           }
+           else{
+            reject("An unknown error occured!");
+           }
+        })
+        ,{
+        loading: 'Logging In...',
+        success: (data)=>data,
+        error: (error)=>error,
+      });
   }
 
   return (

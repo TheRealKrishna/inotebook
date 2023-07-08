@@ -11,7 +11,6 @@ export default function AddNote() {
   const handleClick = (e) => {
     e.preventDefault()
     addNote(note)
-    toast.success('Note Succesfully Created');
     setNote({ title: "", description: "", tag: "" });
   }
 

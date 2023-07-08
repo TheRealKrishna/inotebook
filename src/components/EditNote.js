@@ -14,7 +14,6 @@ export default function EditNote(props) {
       e.preventDefault()
       document.getElementById("editClose").click();
       editNote(note._id, {title:note.title, description: note.description, tag: note.tag})
-      toast.success('Note Succesfully Edited');
     }
     
     const onChange = (e)=>{

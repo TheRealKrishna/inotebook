@@ -17,25 +17,34 @@ export default function Signup() {
     setCredentials({...credentials, [e.target.name] : e.target.value})
   }
 
+
   const handleSubmit = async (e)=>{
-      e.preventDefault()
-      const response = await fetch("http://localhost/api/auth/createuser", {method:"POST", headers : {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
-     });
-     const json = await response.json()
-     if(json.authtoken){
-      localStorage.setItem("auth-token", json.authtoken);
-      navigate("/dashboard");
-      toast.success('Signup Successful');
-     }
-     else if(json.error){
-      toast.error(json.error);
-     }
-     else{
-      toast.error("An unknown error occured!");
-     }
+    e.preventDefault()
+    toast.promise(
+      new Promise(async (resolve, reject)=>{
+        const response = await fetch("https://themescode.shop/api/auth/createuser", {method:"POST", headers : {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
+          });
+        const json = await response.json()
+        if(json.authtoken){
+          localStorage.setItem("auth-token", json.authtoken);
+          navigate("/dashboard");
+          resolve("Account Created Successfully")
+        }
+        else if(json.error){
+          reject(json.error)
+        }
+        else{
+          reject("An unknown error occured!")
+        }
+      })
+      ,{
+      loading: 'Creating Account...',
+      success: (data)=>data,
+      error: (error)=>error,
+    });
   }
 
   return (
