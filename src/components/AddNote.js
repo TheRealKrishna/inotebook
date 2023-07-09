@@ -1,6 +1,5 @@
 import { React, useContext, useState } from 'react'
 import noteContext from '../context/notes/NoteContext'
-import { toast } from 'react-hot-toast'
 
 
 export default function AddNote() {

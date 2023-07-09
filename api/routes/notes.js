@@ -71,10 +71,10 @@ router.put("/deletenote/:id",fetchuser, async (req, res)=>{
     try {
         const note = await Notes.findById(req.params.id)
         if(!note){
-            return res.status(404).send({error: "Note Not Found!"})
+            return res.status(404).send({error: "Note Not Found!"});
         }
         if(note.user.toString() !== req.user){
-            return res.status(401).send({error: "Access Denied!"})
+            return res.status(401).send({error: "Access Denied!"});
         }
         await Notes.findByIdAndRemove(req.params.id);
       return res.send({"Success":"Note Successfully Deleted"});

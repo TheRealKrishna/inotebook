@@ -1,17 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 export default function Login() {
   const [credentials, setCredentials] = useState({email: "", password: ""});
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const message = params.get('message');
+  const status = params.get('status');
 
   useEffect(()=>{
     if(localStorage.getItem("auth-token")){
       navigate("/dashboard")
     }
-  }, [])
+    if(status === "success"){
+      toast.success(message)
+      navigate("/login")
+      return
+    }
+    else if(status === "error"){
+      toast.error(message)
+      navigate("/login")
+    }
+  },[])
 
   const onChange = (e)=>{
     setCredentials({...credentials, [e.target.name] : e.target.value})
@@ -47,12 +60,12 @@ export default function Login() {
   }
 
   return (
-    <section className="my-4">
-    <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+    <section className="my-2">
+    <div className="container py h-100">
+        <div className="row d-flex justify-content-center align-items-center h-">
         <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card shadow-2-strong" style={{borderRadius: "1rem"}}>
-            <div className="card-body p-5 text-center">
+            <div className="card-body p-3 text-center">
 
                 <h3 className="mb-5">Log in</h3>
                 <form onSubmit={handleSubmit}>
@@ -73,6 +86,10 @@ export default function Login() {
 
                 <button className="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                 </form>
+                <p className='m-5'>-------- OR --------</p>
+                <p>Not Registered Yet? <Link to="/signup">Create Account</Link></p>
+                <p className='m-5'>-------- OR --------</p>
+                <p>Forgot Password? <Link to="/forgot-password">Reset Password</Link></p>
             </div>
             </div>
         </div>

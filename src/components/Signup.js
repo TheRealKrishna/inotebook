@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import AccountCreated from './AccountCreated';
 
 export default function Signup() {
   const [credentials, setCredentials] = useState({name: "", email: "", password: ""});
   const navigate = useNavigate();
+  const [accountCreated, setAccountCreated] = useState(false)
 
   useEffect(()=>{
     if(localStorage.getItem("auth-token")){
@@ -28,10 +30,9 @@ export default function Signup() {
             body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
           });
         const json = await response.json()
-        if(json.authtoken){
-          localStorage.setItem("auth-token", json.authtoken);
-          navigate("/dashboard");
-          resolve("Account Created Successfully")
+        if(json.success){
+          resolve("Account Created Successfully!")
+          setAccountCreated(true)
         }
         else if(json.error){
           reject(json.error)
@@ -47,38 +48,45 @@ export default function Signup() {
     });
   }
 
-  return (
-    <section className="my-4">
-    <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div className="card shadow-2-strong" style={{borderRadius: "1rem"}}>
-            <div className="card-body p-5 text-center">
+  if (accountCreated) {
+    return <AccountCreated />;
+  }
+  else{
+    return (
+      <section className="my-2">
+      <div className="container py-1 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div className="card shadow-2-strong" style={{borderRadius: "1rem"}}>
+              <div className="card-body p-5 text-center">
 
-                <h3 className="mb-5">Sign Up</h3>
-                <form onSubmit={handleSubmit}>
-                <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="name">Full Name</label>
-                <input type="name" id="name" name="name" value={credentials.name} onChange={onChange} className="form-control form-control-lg" required />
-                </div>
-                
-                <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} className="form-control form-control-lg" required />
-                </div>
+                  <h3 className="mb-5">Sign Up</h3>
+                  <form onSubmit={handleSubmit}>
+                  <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="name">Full Name</label>
+                  <input type="name" id="name" name="name" value={credentials.name} onChange={onChange} className="form-control form-control-lg" minLength={3} required />
+                  </div>
+                  
+                  <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="email">Email</label>
+                  <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} className="form-control form-control-lg" required />
+                  </div>
 
-                <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" value={credentials.password} onChange={onChange} className="form-control form-control-lg" minLength={8}required />
-                </div>
+                  <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="password">Password</label>
+                  <input type="password" id="password" name="password" value={credentials.password} onChange={onChange} className="form-control form-control-lg" minLength={8}required />
+                  </div>
 
-                <button className="btn btn-primary btn-lg btn-block" type="submit">Create Account</button>
-                </form>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </section>
-  )
+                  <button className="btn btn-primary btn-lg btn-block" type="submit">Create Account</button>
+                  </form>
+                  <p className='m-5'>-------- OR --------</p>
+                  <p>Already Have An Account? <Link to="/login">Login</Link></p>
+              </div>
+              </div>
+          </div>
+          </div>
+      </div>
+      </section>
+    )
+  }
 }
