@@ -9,7 +9,6 @@ import NoteState from './context/notes/NoteState';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { Toaster } from 'react-hot-toast';
-import AccountCreated from './components/AccountCreated';
 import ForgotPassword from './components/ForgotPassword';
 
 function App() {
