@@ -116,12 +116,12 @@ router.get("/verify/:id", async (req, res)=>{
             status = "error";
         }
 
-        return res.redirect(`https://themescode.shop/login?status=${status}&message=${message}`);
+        return res.redirect(`${process.env.FRONTEND_URL}/login?status=${status}&message=${message}`);
     }
     catch(error){
         message = "Internal Server Error Occured!";
         status = "error";
-        return res.redirect(`https://themescode.shop/forgot-password?status=${status}&message=${message}`);
+        return res.redirect(`${process.env.FRONTEND_URL}/forgot-password?status=${status}&message=${message}`);
     }
 })
 

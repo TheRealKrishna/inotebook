@@ -24,7 +24,7 @@ export default function Signup() {
     e.preventDefault()
     toast.promise(
       new Promise(async (resolve, reject)=>{
-        const response = await fetch("https://themescode.shop/api/auth/createuser", {method:"POST", headers : {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/createuser`, {method:"POST", headers : {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
@@ -76,7 +76,8 @@ export default function Signup() {
                   <label className="form-label" htmlFor="password">Password</label>
                   <input type="password" id="password" name="password" value={credentials.password} onChange={onChange} className="form-control form-control-lg" minLength={8}required />
                   </div>
-
+                  <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                  <br/>
                   <button className="btn btn-primary btn-lg btn-block" type="submit">Create Account</button>
                   </form>
                   <p className='m-5'>-------- OR --------</p>

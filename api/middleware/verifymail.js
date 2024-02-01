@@ -1,23 +1,23 @@
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
 
-const verifyMail = async (email)=>{
+const verifyMail = async (email) => {
     try {
-        let user = await User.findOne({email:email});
+        let user = await User.findOne({ email: email });
         const transport = nodemailer.createTransport({
-            host: "business97.web-hosting.com",
+            host: process.env.node_mailer_url,
             port: 465,
             auth: {
-            user: "support@themescode.shop",
-            pass: "KrishnaGG941."
+                user: process.env.node_mailer_username,
+                pass: process.env.node_mailer_password
             }
-          });
-    
+        });
+
         const message = {
-            from: "support@themescode.shop",
+            from: process.env.node_mailer_username,
             to: email,
-            subject: "Verify your email on Themes Code shop",
-            html: `<p>Please verify your email by clicking on this link: <a href="https://themescode.shop/api/auth/verify/${user.id}" target="_blank">https://themescode.shop/api/auth/verify/${user.id}</a>`
+            subject: "Verify your email on iNoteBook",
+            html: `<p>Please verify your email by clicking on this link: <a href="${process.env.FRONTEND_URL}/api/auth/verify/${user.id}" target="_blank">${process.env.FRONTEND_URL}/api/auth/verify/${user.id}</a>`
         }
 
         transport.sendMail(message, (error) => {

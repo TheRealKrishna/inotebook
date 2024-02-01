@@ -34,7 +34,7 @@ export default function Login() {
       e.preventDefault()
       toast.promise(
         new Promise(async(resolve, reject)=>{
-          const response = await fetch("https://themescode.shop/api/auth/login", {method:"POST", headers : {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {method:"POST", headers : {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({email: credentials.email, password: credentials.password})

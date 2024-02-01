@@ -19,7 +19,7 @@ export default function ForgotPassword() {
 
   const verifyToken = async()=>{
     toast.promise(new Promise(async(resolve, reject)=>{
-      const response = await fetch("https://themescode.shop/api/auth/verifyresetpasswordtoken", {method:"POST", headers : {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/verifyresetpasswordtoken`, {method:"POST", headers : {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({resetPasswordToken: token})
@@ -74,7 +74,7 @@ export default function ForgotPassword() {
     e.preventDefault()
     if(newPassword === confirmNewPassword){
       toast.promise(new Promise(async(resolve, reject)=>{
-            const response = await fetch("https://themescode.shop/api/auth/resetpassword", {method:"POST", headers : {"Content-Type": "application/json"},
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/resetpassword`, {method:"POST", headers : {"Content-Type": "application/json"},
                 body: JSON.stringify({password: newPassword, resetPasswordToken: token})
             });
             const json = await response.json();
@@ -96,7 +96,7 @@ export default function ForgotPassword() {
   const handleEmailSubmit = async (e)=>{
       e.preventDefault()
       toast.promise(new Promise(async(resolve, reject)=>{
-          const response = await fetch("https://themescode.shop/api/auth/forgotpassword", {method:"POST", headers : {"Content-Type": "application/json"},
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/forgotpassword`, {method:"POST", headers : {"Content-Type": "application/json"},
                 body: JSON.stringify({email: email})
             });
          const json = await response.json();
