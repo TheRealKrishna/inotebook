@@ -45,12 +45,12 @@ const [noteToEdit, setNoteToEdit] = useState("");
             width="30"
             visible={loader}
           /></center>
-          <div className="row my-3">
+          <div className="d-flex justify-content-between" style={{gap:"20px", flexWrap:"wrap"}}>
             {notes.length === 0 && !loader && <p>No Notes To Display</p>}
               {notes.map((note)=>{
                 return(
-                <div className="col-6 md-6" key={note._id}>
-                  <div className="card my-3" style={{height: "90%"}}>
+                <div className="col notesSection" key={note._id} >
+                  <div className="card my-3" style={{height: "99%"}}>
                     <div className="card-header bg-warning">
                       Note
                       <i className="fa-solid fa-pen-to-square" style={{right: "15px", position: "absolute", cursor:"pointer"}}data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{setNoteToEdit(note._id)}}></i>
@@ -59,7 +59,7 @@ const [noteToEdit, setNoteToEdit] = useState("");
                     <div className="card-body">
                       <h5 className="card-title">{note.title}</h5>
                       <p className="card-text">{note.description}</p>
-                      <p className="btn btn-danger" style={{fontSize: "10px",padding:"5px", borderRadius: "100px", position: "absolute", bottom: "-16px", left: "0"}}>{note.tag}</p>
+                      <p className="btn btn-danger" style={{fontSize: "10px", minWidth:"40px",padding:"5px",border:"2px solid black", borderRadius: "5px", position: "absolute", bottom: "-16px", left: "0"}}>{note.tag}</p>
                     </div>
                   </div>
                 </div>

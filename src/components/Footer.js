@@ -5,7 +5,7 @@ export default function Footer() {
     <div className='mt-10'>
       <footer className="footer mt-auto py-3 bg-light">
         <div className="container text-center">
-          <span className="text-muted">&copy; 2023 iNoteBook. All rights reserved.</span>
+          <span className="text-muted">Copyright &copy; iNoteBook {new Date().getFullYear()}. All rights reserved.</span>
         </div>
       </footer>
     </div>

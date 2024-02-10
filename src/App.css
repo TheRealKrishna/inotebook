@@ -1,0 +1,9 @@
+.notesSection{
+    flex: 40%;    
+}
+
+@media (max-width:768px) {
+    .notesSection{
+        flex: 100%;
+    }
+}
