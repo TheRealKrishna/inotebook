@@ -13,6 +13,11 @@ app.use(cors())
 app.use("/api/auth", require("./routes/auth"))
 app.use("/api/notes", require("./routes/notes"))
 
+
+app.use("/api", (req, res)=>{
+  return res.send("Backend for iNoteBook..")
+})
+
 app.listen(port, () => {
   console.log(`app running on port http://localhost:${port}`)
 })
