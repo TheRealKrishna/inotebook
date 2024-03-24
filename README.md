@@ -62,8 +62,7 @@ npm install</code></div></div></pre>
   <li>
     <p>Start the frontend development server:</p>
     <pre><div class="dark bg-gray-950 rounded-md"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-bash"><span class="hljs-built_in">cd..</span>
-npm start
-  </code></div></div></pre>
+npm start</code></div></div></pre>
   </li>
   <li>
     <p>Access the application at <code>http://localhost:3000</code>.</p>
