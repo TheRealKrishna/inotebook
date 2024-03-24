@@ -42,15 +42,18 @@
     <pre><div class="dark bg-gray-950 rounded-md"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-bash"><span class="hljs-built_in">cd</span> inotebook</code></div></div></pre>
   </li>
   <li>
-    <p>Set up environment variables by creating a <code>.env</code> file in the <code>api</code> directory and add the
-      necessary variables mentioned above.</p>
+    <p>Set up environment variables by creating a <code>.env</code> file in the <code>inotebook</code> directory and add the
+      necessary frontend variables mentioned above.</p>
+  </li>
+  <li>
+    <p>Set up environment variables by creating a <code>.env</code> file in the <code>inotebook/api</code> directory and add the
+      necessary backend variables mentioned above.</p>
   </li>
   <li>
     <p>Install dependencies:</p>
     <pre><div class="dark bg-gray-950 rounded-md"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-bash">npm install
 <span class="hljs-built_in">cd</span> api
-npm install
-  </code></div></div></pre>
+npm install</code></div></div></pre>
   </li>
   <li>
     <p>Start the backend server:</p>
