@@ -11,13 +11,11 @@
   <li>MongoDB</li>
 </ul>
 <h2>Folder Structure</h2>
-<pre><div class="dark bg-gray-950 rounded-md"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs">
-  inotebook/ (React frontend)
+<pre><div class="dark bg-gray-950 rounded-md"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs">krishna-portfolio/ (React frontend)
 │   └── ...
 ├── api/ (Node.js backend)
 │   └── ...
-└── README.md
-  </code></div></div></pre>
+└── README.md</code></div></div></pre>
 <h2>Environment Variables</h2>
 <h3>For Frontend (.env)</h3>
 <ul>
