@@ -14,14 +14,6 @@ app.use(cors())
 app.use("/auth", require("./routes/auth"))
 app.use("/notes", require("./routes/notes"))
 
-app.use("/api", () => {
-  router.get("/api", fetchuser, async (req, res) => {
-    return res.send("/api/api Backend for iNoteBook..")
-  })
-  return router;
-})
-
-
 app.use("/", (req, res) => {
   return res.send("Backend for iNoteBook..")
 })
