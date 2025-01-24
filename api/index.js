@@ -10,11 +10,11 @@ app.use(express.json())
 app.use(cors())
 
 //Available Routes
-app.use("/api/auth", require("./routes/auth"))
-app.use("/api/notes", require("./routes/notes"))
+app.use("/auth", require("./routes/auth"))
+app.use("/notes", require("./routes/notes"))
 
 
-app.use("/api", (req, res)=>{
+app.use("/", (req, res) => {
   return res.send("Backend for iNoteBook..")
 })
 
