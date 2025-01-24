@@ -17,7 +17,7 @@ const verifyMail = async (email) => {
             from: process.env.node_mailer_username,
             to: email,
             subject: "Verify your email on iNoteBook",
-            html: `<p>Please verify your email by clicking on this link: <a href="${process.env.FRONTEND_URL}/api/auth/verify/${user.id}" target="_blank">${process.env.FRONTEND_URL}/api/auth/verify/${user.id}</a>`
+            html: `<p>Please verify your email by clicking on this link: <a href="${process.env.FRONTEND_URL}/auth/verify/${user.id}" target="_blank">${process.env.FRONTEND_URL}/auth/verify/${user.id}</a>`
         }
 
         transport.sendMail(message, (error) => {

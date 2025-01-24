@@ -13,7 +13,7 @@ const bcryptjs = require("bcryptjs")
 const saltForResetPassword = bcryptjs.genSaltSync(10)
 
 
-// Route 1: Sign Up Using localhost:5000/api/auth/createuser (POST) (No Login Required)
+// Route 1: Sign Up Using localhost:5000/auth/createuser (POST) (No Login Required)
 router.post("/createuser",[
     body("name", "Please Enter A Valid Name!").isLength({min: 3}),
     body("email", "Please Enter A Valid E-mail!").isEmail(),
