@@ -19,7 +19,6 @@
 <h2>Environment Variables</h2>
 <h3>For Frontend (.env)</h3>
 <ul>
-  <li><code>REACT_APP_HOST_URL</code>: Frontend URL.</li>
   <li><code>REACT_APP_API_URL</code>: Backend URL.</li>
 </ul>
 <h3>For Backend (api/.env)</h3>
