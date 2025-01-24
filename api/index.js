@@ -5,7 +5,6 @@ connectToMongo();
 const express = require('express')
 const app = express()
 const port = 80
-const router = express.Router()
 
 app.use(express.json())
 app.use(cors())
@@ -20,4 +19,4 @@ app.use("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`app running on port http://localhost:${port}`)
-})
+});
