@@ -12,9 +12,9 @@ router.post("/fetchnotes",fetchuser, async (req, res)=>{
     }
     catch (error) {
         console.error(error.message)
-      return res.status(500).json({error:"Internal Server Error Occured!"})
+      return res.status(500).json({error:"Internal Server Error Occurred!"});
     }
-})
+});
 
 // Route 2: Add a new Note to A User Using localhost:5000/notes/addnote (POST) (Login Required)
 router.post("/addnote",fetchuser,[

@@ -5,6 +5,7 @@ connectToMongo();
 const express = require('express')
 const app = express()
 const port = 80
+const router = express.Router()
 
 app.use(express.json())
 app.use(cors())
@@ -13,8 +14,11 @@ app.use(cors())
 app.use("/auth", require("./routes/auth"))
 app.use("/notes", require("./routes/notes"))
 
-app.get("/api", (req, res) => {
-  return res.send("/api Backend for iNoteBook..")
+app.use("/api", () => {
+  router.get("/api", fetchuser, async (req, res) => {
+    return res.send("/api/api Backend for iNoteBook..")
+  })
+  return router;
 })
 
 
