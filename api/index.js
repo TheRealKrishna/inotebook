@@ -13,7 +13,7 @@ app.use(cors())
 app.use("/auth", require("./routes/auth"))
 app.use("/notes", require("./routes/notes"))
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   return res.send("Backend for iNoteBook..")
 })
 
