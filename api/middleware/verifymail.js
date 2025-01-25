@@ -19,14 +19,9 @@ const verifyMail = async (email) => {
             subject: "Verify your email on iNoteBook",
             html: `<p>Please verify your email by clicking on this link: <a href="${process.env.FRONTEND_URL}/auth/verify/${user.id}" target="_blank">${process.env.FRONTEND_URL}/auth/verify/${user.id}</a>`
         }
-
-        transport.sendMail(message, (error) => {
-            if (error) {
-                return
-            }
-        });
+        await transport.sendMail(message);
     } catch (error) {
-        return
+        return error;
     }
 }
 

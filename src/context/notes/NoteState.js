@@ -29,7 +29,7 @@ const NoteState = (props)=>{
             body: JSON.stringify(note)
           });
           await fetchNotes()
-          resolve("Note Added Succesfully")
+          resolve("Note Added Successfully")
           }),
           {
             loading: 'Adding Note...',

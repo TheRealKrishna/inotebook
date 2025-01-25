@@ -36,7 +36,7 @@ router.post("/createuser",[
             email: req.body.email,
             password: secPassword
         });
-        verifyMail(user.email);
+        await verifyMail(user.email);
         return res.send({success:true})
     }
     catch(error){
@@ -138,7 +138,7 @@ router.post("/forgotpassword",[body("email", "Please Enter A Valid E-mail!").isE
             return res.status(400).json({error:"Account With This Email Do Not Exist!"});
         }
         let resetPasswordToken = randomstring.generate();
-        passwordResetMail(req.body.email, resetPasswordToken);
+        await passwordResetMail(req.body.email, resetPasswordToken);
         user.resetPasswordToken = bcryptjs.hashSync(resetPasswordToken, saltForResetPassword)
         user.save();
         return res.json({success: true});
